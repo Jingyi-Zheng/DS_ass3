@@ -1,0 +1,30 @@
+syntax = "proto3";
+
+option go_package = "github.com/ITU-Distributed-System-2023/proto";
+
+package proto;
+
+message AskForTimeMessage {
+  int64 clientId = 1;
+}
+
+message TimeMessage {
+  string serverName = 1;
+  string time = 2;
+}
+
+service TimeAsk {
+  rpc AskForTime(AskForTimeMessage) returns (TimeMessage);
+}
+
+
+service ChittyChat {
+  rpc Chat (stream ChatMessage) returns (stream ChatMessage);
+}
+
+message ChatMessage {
+  int64 clock = 1;
+  int64 clientId = 2;
+  string content = 3;
+  string message_type = 4;
+}
